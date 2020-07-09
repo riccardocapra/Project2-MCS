@@ -2,7 +2,7 @@ import io
 import os
 from PIL import Image, ImageTk #pip install --upgrade Pillow 
 import numpy as np
-from FFT import *
+from FFT import get_2D_dct, get_2d_idct
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
@@ -127,7 +127,7 @@ window = tk.Tk()
 # definisco la dimensione di default
 window.geometry("900x350")
 # definisco il titolo
-window.title("Image Compressor")
+window.title("Compressore immagini progetto 2 MCS")
 # la rendo non responsive
 window.resizable(False, False)
 # calcolo la risuoluzione in base allo schermo dell’utente
@@ -136,36 +136,36 @@ screen_height = window.winfo_screenheight()
 x = screen_width / 2 - 900 / 2
 y = screen_height / 2 - 350 / 2
 window.geometry("+%d+%d" % (x, y))
-# "Choose bitmap image"
-lb1 = tk.Label(window, text="Choose bitmap image: ", font=("Arial", 15))
+
+lb1 = tk.Label(window, text="Scegli una immagine BITMAP: ", font=("Arial", 15))
 lb1.grid(row=0, column=1, sticky="E", padx=5, pady=5)
- # eseguo la funzione "browseimage"
-img_btn = tk.Button(text="Open", font=("Arial", 15), command=browseimage)
+
+img_btn = tk.Button(text="Apri", font=("Arial", 15), command=browseimage)
 img_btn.grid(row=0, column=2, sticky="W", pady=5)
 input_path = tk.Entry(font=("Arial", 15), width=80, justify="center")
 input_path.configure(state="readonly")
 input_path.grid(row=1, column=0, sticky="W", padx=5, pady=5, columnspan=4)
-# "Choose output folder"
-lb3 = tk.Label(window, text="Choose output folder: ", font=("Arial", 15))
+
+lb3 = tk.Label(window, text="Scegli cartella di Output: ", font=("Arial", 15))
 lb3.grid(row=2, column=1, sticky="E", padx=5, pady=5)
- # eseguo la funzione "browsefolder"
-img_btn = tk.Button(text="Save", font=("Arial", 15), command=browsefolder)
+
+img_btn = tk.Button(text="Salva", font=("Arial", 15), command=browsefolder)
 img_btn.grid(row=2, column=2, sticky="W", pady=10)
 output_path = tk.Entry(font=("Arial", 15), width=80, justify="center")
 output_path.configure(state="readonly")
 output_path.grid(row=3, column=0, sticky="W", padx=5, pady=5, columnspan=4)
-# "Set F >= 1"
-lb5 = tk.Label(window, text="Set F >= 1: ", font=("Arial", 15))
+
+lb5 = tk.Label(window, text="Imposta F >= 1: ", font=("Arial", 15))
 lb5.grid(row=4, column=1, sticky="E", padx=5, pady=10)
 F_spin = tk.Spinbox(from_=1, to=10000, font=("Arial", 15), width=10)
 F_spin.grid(row=4, column=2, sticky="W", pady=5)
-# "Set d [0; 2F-2]"
-lb5 = tk.Label(window, text="Set d [0; 2F-2]: ", font=("Arial", 15))
+
+lb5 = tk.Label(window, text="Imposta d [0; 2F-2]: ", font=("Arial", 15))
 lb5.grid(row=5, column=1, sticky="E", padx=5, pady=10)
 d_spin = tk.Spinbox(from_=0, to=19998, font=("Arial", 15), width=10)
 d_spin.grid(row=5, column=2, sticky="W", pady=5)
-# al click del bottone eseguo la funzione "compute"
-compute_btn = tk.Button(text="Compute", font=("Arial", 15), command=
+
+compute_btn = tk.Button(text="Calcola", font=("Arial", 15), command=
 solving)
 compute_btn.grid(row=6, column=1, sticky="E", padx=5, pady=10)
 if __name__ == "__main__":
