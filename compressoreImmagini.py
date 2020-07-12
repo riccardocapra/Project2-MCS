@@ -78,8 +78,11 @@ def solving():
             # inizializzo la matrice per la ricostruzione a 0
             reconstructed_image = np.zeros(img.shape)
             # prendo "blocchi" fi dimensione FxF
+            c = 0
             for x in list(range(0, x_size, F)):
                 for y in list(range(0, y_size, F)):
+                    print(c)
+                    c = c + 1
                     if x + F > x_size or y + F > y_size:
                         continue
                     # faccio la DCT2 del blocco
@@ -92,16 +95,16 @@ def solving():
                     dct_inverse = get_2d_idct(dct)
                     # ricostruisco il blocco
                     reconstructed_image[x: x + F, y: y + F] = dct_inverse
-                    # ricostruisco l’immagine
-                    reconstructed_image = get_reconstructed_image(reconstructed_image)
-                    # salvo l’immagine ricostruita
-                    reconstructed_image.save(img_output_path)
-                    # confronto le 2 immagini
-                    display_images(img_input_path, img_output_path)
-            else:
-                tk.messagebox.showerror("Error", "Incorrect F and parameters")
+            # ricostruisco l’immagine
+            reconstructed_image = get_reconstructed_image(reconstructed_image)
+            # salvo l’immagine ricostruita
+            reconstructed_image.save(img_output_path)
+            # confronto le 2 immagini
+            display_images(img_input_path, img_output_path)
         else:
-            tk.messagebox.showerror("Error", "Incorrect image paths")
+            tk.messagebox.showerror("Error", "Incorrect F and parameters")
+    else:
+        tk.messagebox.showerror("Error", "Incorrect image paths")
 
 def browseimage():
     # apro la finestra di dialogo
