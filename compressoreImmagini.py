@@ -117,7 +117,7 @@ def getfolder():
 # main window
 window = tk.Tk()
 
-window.geometry("600x350")
+window.geometry("600x375")
 window.title("Progetto 2 - pt.2 Modelli del Calcolo Scientifico")
 window.resizable(True, True)
 window.grid_columnconfigure(0, weight=1)
