@@ -5,7 +5,7 @@ import time
 import csv
 if __name__ == "__main__":
     
-    dimension_array = np.linspace(25, 700, num=4)
+    dimension_array = np.linspace(25, 700, num=28)
     time_array_library_dct = []
     time_array_my_dct = []
 
